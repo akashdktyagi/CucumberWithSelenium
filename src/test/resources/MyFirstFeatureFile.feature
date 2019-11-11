@@ -1,12 +1,26 @@
 Feature: Parabank Login feature
   I want to test parabank login functionality
 
-  @tag1
   Scenario: Validate Login
     Given Browser is  invoked
     And navigate to URL "http://parabank.parasoft.com/parabank/index.htm"
     When I enter username as "john"
     And I enter password as "demo"
     And I click on submit button
-    Then I page title should come "ParaBank | Accounts Overview"
+    Then Page title should come "ParaBank | Accounts Overview"
+   
+  @trial 
+	Scenario: Validate Create New Account
+		Given Browser is  invoked
+		And navigate to URL "http://parabank.parasoft.com/parabank/index.htm"
+		When I enter username as "john"
+		And I enter password as "demo"
+		And I click on submit button
+		And I click on "Open New Account"
+    Then Page title should come "ParaBank | Open Account"
+    
+  Scenario: Validate Create New Account new
+		Given Login in to Parabank url as "http://parabank.parasoft.com/parabank/index.htm" username as "john" passowrd as "demo"
+		When I click on "Open New Account"
+    Then Page title should come "ParaBank | Open Account"	
 

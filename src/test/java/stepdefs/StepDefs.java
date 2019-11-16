@@ -4,8 +4,10 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import cucumber.api.Scenario;
@@ -99,6 +101,51 @@ public class StepDefs {
 		scn.write("User successfully logged in. Page Title coming as: " + string);
 	}
 
+	//*********************************************
+	//*******************Transfer Funds************
+	//*********************************************
+	@When("I select account {string} in from account field")
+	public void i_select_account_in_from_account_field(String arg) {
+
+		WebElement element = driver.findElement(By.id("fromAccountId"));
+		Select select  = new Select(element);
+		select.selectByVisibleText(arg);
+		scn.write("From account field selected with value as : " + arg);
+	}
+
+	@When("I select account {string} in to account field")
+	public void i_select_account_in_to_account_field(String arg) {
+		WebElement element = driver.findElement(By.id("toAccountId"));
+		Select select  = new Select(element);
+		select.selectByVisibleText(arg);
+		scn.write("To account field selected with value as : " + arg);
+
+	}
+
+	@When("I enter amount as {string} in amount field")
+	public void i_enter_amount_as_in_amount_field(String string) {
+		driver.findElement(By.id("amount")).sendKeys(string);;
+		scn.write("Entered amount as :" + string);
+
+	}
+
+	@When("I click on transfer funds button")
+	public void i_click_on_transfer_funds_button() {
+		driver.findElement(By.xpath("//input[@value='Transfer']")).click();
+		scn.write("Tranfer funds button clicked");
+	}
+
+	@Then("Transfer is sucessfull message should come")
+	public void transfer_is_sucessfull_message_should_come() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Then("verify amount is transfered from account {string} to account {string}")
+	public void verify_amount_is_transfered_from_account_to_account(String string, String string2) {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
 
 
 	

@@ -13,6 +13,7 @@ import cucumber.api.junit.Cucumber;
 				"html:target/CucumberReport",
 				"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
 		tags = "@wip",
+		monochrome = true,
 		dryRun = false
 		
 		)

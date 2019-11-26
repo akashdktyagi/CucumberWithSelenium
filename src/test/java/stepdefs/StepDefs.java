@@ -16,7 +16,7 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import junit.framework.Assert;
+import org.junit.Assert;
 
 public class StepDefs {
 	
@@ -146,6 +146,61 @@ public class StepDefs {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new cucumber.api.PendingException();
 	}
+
+	@Then("I click on {string} Button")
+	public void i_click_on_Button(String string) {
+		driver.findElement(By.xpath("//*[@id=\"leftPanel\"]/ul/li[7]/a")).click();
+		scn.write("Request for Loan");
+	    
+	}
+
+	@Then("I enter Loan Amount as {string}")
+	public void i_enter_Loan_Amount_as(String string) {
+		driver.findElement(By.id("amount")).sendKeys(string);
+		scn.write("I enter Loan amount ");
+	    
+	    
+	}
+
+	@Then("I enter Downpayment as {string}")
+	public void i_enter_Downpayment_as(String string) {
+		driver.findElement(By.id("downPayment")).sendKeys(string);
+		scn.write("I enter Downpayment");
+	    
+	}
+
+	@Then("I enter From account  as {string}")
+	public void i_enter_From_account_as(String string) {
+		driver.findElement(By.id("fromAccountId")).sendKeys(string);
+		scn.write("I enter From account  as {string}");
+	    
+	}
+
+	@Then("I click on Appply Now Button")
+	public void i_click_on_Appply_Now_Button() {
+		driver.findElement(By.xpath("//*[@id=\"leftPanel\"]/ul/li[7]/a")).click();
+		scn.write("I click on Appply Now Button");
+	    
+	    
+	}
+	
+	@Then("Loan Request Processed page should Display")
+	public void loan_Request_Processed_page_should_Display() {
+		driver.findElement(By.name("Loan Request Processed"));
+		scn.write("Loan Request Processed page should Display");
+	    
+	    
+	}
+
+	@Then("Loan Status is denied {string}")
+	public void loan_Status_is_denied(String string) {
+		driver.findElement(By.id("loanStatus")).sendKeys(string);
+		scn.write("Loan Status is denied {string}");
+	    
+	   
+	}
+
+
 
 
 	

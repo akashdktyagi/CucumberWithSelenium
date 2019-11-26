@@ -14,5 +14,3 @@ Feature: Parabank Login for Loan Request
     And I enter Down Payment as "10"
     Then I select From account as "15786"
     And click on Apply Now Button
-    
-    

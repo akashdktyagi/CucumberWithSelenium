@@ -16,7 +16,7 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import junit.framework.Assert;
+import org.junit.Assert;
 
 public class StepDefs {
 	
@@ -145,6 +145,39 @@ public class StepDefs {
 	public void verify_amount_is_transfered_from_account_to_account(String string, String string2) {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new cucumber.api.PendingException();
+	}
+
+	
+	//***********************************************************
+	//*******************Request Loan****************************
+	//***********************************************************
+	
+	
+	@Then("I Enter loan amount as {string}")
+	public void i_Enter_loan_amount_as(String string) {
+		driver.findElement(By.id("amount")).sendKeys(string);;
+		scn.write("Entered amount as :" + string);
+
+	}
+
+	@Then("I enter Down Payment as {string}")
+	public void i_enter_Down_Payment_as(String string) {
+		driver.findElement(By.id("downPayment")).sendKeys(string);
+		scn.write("Entered DownPayment amount as :" + string);
+
+	}
+
+	@Then("I select From account as {string}")
+	public void i_select_From_account_as(String string) {
+		WebElement element = driver.findElement(By.id("fromAccountId"));
+		Select select  = new Select(element);
+		select.selectByVisibleText(string);
+		scn.write("From account field selected with value as : " +string);
+	}
+	@Then("click on Apply Now Button")
+	public void click_on_Apply_Now_Button() {
+		driver.findElement(By.xpath("//input[@value='Apply Now']")).click();
+		scn.write("Tranfer funds button clicked");
 	}
 
 

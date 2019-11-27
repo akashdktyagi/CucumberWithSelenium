@@ -153,33 +153,56 @@ public class StepDefs {
 	//***********************************************************
 	
 	
-	@Then("I Enter loan amount as {string}")
-	public void i_Enter_loan_amount_as(String string) {
-		driver.findElement(By.id("amount")).sendKeys(string);;
-		scn.write("Entered amount as :" + string);
-
+	@Then("I click on {string} Button")
+	public void i_click_on_Button(String string) {
+		driver.findElement(By.xpath("//*[@id=\"leftPanel\"]/ul/li[7]/a")).click();
+		scn.write("Request for Loan");
+	    
 	}
 
-	@Then("I enter Down Payment as {string}")
-	public void i_enter_Down_Payment_as(String string) {
+	@Then("I enter Loan Amount as {string}")
+	public void i_enter_Loan_Amount_as(String string) {
+		driver.findElement(By.id("amount")).sendKeys(string);
+		scn.write("I enter Loan amount ");
+	    
+	    
+	}
+
+	@Then("I enter Downpayment as {string}")
+	public void i_enter_Downpayment_as(String string) {
 		driver.findElement(By.id("downPayment")).sendKeys(string);
-		scn.write("Entered DownPayment amount as :" + string);
-
+		scn.write("I enter Downpayment");
+	    
 	}
 
-	@Then("I select From account as {string}")
-	public void i_select_From_account_as(String string) {
-		WebElement element = driver.findElement(By.id("fromAccountId"));
-		Select select  = new Select(element);
-		select.selectByVisibleText(string);
-		scn.write("From account field selected with value as : " +string);
+	@Then("I enter From account  as {string}")
+	public void i_enter_From_account_as(String string) {
+		driver.findElement(By.id("fromAccountId")).sendKeys(string);
+		scn.write("I enter From account  as {string}");
+	    
 	}
-	@Then("click on Apply Now Button")
-	public void click_on_Apply_Now_Button() {
+
+	@Then("I click on Appply Now Button")
+	public void i_click_on_Appply_Now_Button() {
 		driver.findElement(By.xpath("//input[@value='Apply Now']")).click();
-		scn.write("Tranfer funds button clicked");
+		scn.write("I click on Appply Now Button");
+	    
+	    
+	}
+	
+	@Then("Loan Request Processed page should Display")
+	public void loan_Request_Processed_page_should_Display() {
+		driver.findElement(By.name("Loan Request Processed"));
+		scn.write("Loan Request Processed page should Display");
+	    
+	    
 	}
 
-
-	
+	@Then("Loan Status is denied {string}")
+	public void loan_Status_is_denied(String string) {
+		driver.findElement(By.id("loanStatus")).sendKeys(string);
+		scn.write("Loan Status is denied {string}");
+	    
+	   
+	}
 }

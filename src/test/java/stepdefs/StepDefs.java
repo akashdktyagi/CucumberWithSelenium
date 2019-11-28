@@ -1,3 +1,5 @@
+
+
 package stepdefs;
 
 import java.util.concurrent.TimeUnit;
@@ -27,6 +29,8 @@ public class StepDefs {
 	//Hooks
 	@Before
 	public void BeforeMethod(Scenario s) {
+		System.setProperty("webdriver.chrome.driver", "C:\\Drivers\\chromedriver.exe");
+		//driver = new ChromeDriver();
 		this.scn = s;
 	}
 	
@@ -146,6 +150,96 @@ public class StepDefs {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new cucumber.api.PendingException();
 	}
+
+	@When("I entered loan amount as {string}")
+	public void i_entered_loan_amount_as(String string) {
+	    driver.findElement(By.id("amount")).sendKeys(string);
+	    scn.write("entered amount as" +string);
+	}
+
+	@When("I entered down Payment as {string}")
+	public void i_entered_down_Payment_as(String string) {
+	driver.findElement(By.id("downPayment")).sendKeys(string);
+	scn.write("entered downpayment as" +string);
+	
+	
+	}
+	
+	
+	
+
+	@When("I click on {string} button")
+	public void i_click_on_button(String string) {
+	   driver.findElement(By.xpath("//input[@value=\"Apply Now\"]")).click();
+	   scn.write("Apply now button is clicked");
+	}
+
+
+@When("I entered first name as {string}")
+public void i_entered_first_name_as(String string) {
+    driver.findElement(By.name("firstName")).sendKeys(string);
+    scn.write("entered first name" + string);
+}
+
+@When("I entered Last Name  {string}")
+public void i_entered_Last_Name(String string) {
+	driver.findElement(By.name("lastName")).sendKeys(string);
+    scn.write("entered last name" + string);
+  
+}
+
+@When("I entered Address	{string}")
+public void i_entered_Address(String string) {
+	driver.findElement(By.name("address.street")).sendKeys(string);
+    scn.write("entered Address" + string);
+}
+
+@When("I entered City {string}")
+public void i_entered_City(String string) {
+	driver.findElement(By.name("address.city")).sendKeys(string);
+    scn.write("entered city" + string);   
+}
+
+@When("I entered State	{string}")
+public void i_entered_State(String string) {
+	driver.findElement(By.name("address.state")).sendKeys(string);
+    scn.write("entered State" + string);
+}
+
+@When("I entered Zip Code	{string}")
+public void i_entered_Zip_Code(String string) {
+	driver.findElement(By.name("address.zipCode")).sendKeys(string);
+    scn.write("entered zipcode" + string);
+}
+
+@When("I entered SSN  {string}")
+public void i_entered_SSN(String string) {
+	driver.findElement(By.name("ssn")).sendKeys(string);
+    scn.write("entered ssn" + string);
+}
+
+@When("I click {string}")
+public void i_click(String string) {
+	driver.findElement(By.xpath("//input[@value='Find My Login Info']")).click();
+    scn.write("forgetLoginInfo button clicked");
+}
+
+@Then("error msg should be appeared as {string}")
+public void error_msg_should_be_appeared_as(String string) {
+	String actualtext = driver.findElement(By.className("error")).getText();
+	String expectedtext = "The customer informationssss provided could not be found.";
+	if(actualtext.equals(expectedtext))
+	{
+		scn.write("pass:The customer information provided could not be found.");
+	}
+	else
+	{
+		scn.write("fail");
+	}
+}
+
+
+	
 
 
 	

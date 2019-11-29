@@ -237,10 +237,95 @@ public void error_msg_should_be_appeared_as(String string) {
 		scn.write("fail");
 	}
 }
-
-
-	
-
-
-	
+@When("I entered First name as {string}")
+public void i_entered_First_name_as(String string) {
+    driver.findElement(By.name("customer.firstName")).sendKeys(string);
+    scn.write("entered first name" +string);
 }
+
+
+@When("I entered Last Name as {string}")
+public void i_entered_Last_Name_as(String string) {
+	driver.findElement(By.name("customer.lastName")).sendKeys(string);
+    scn.write("entered last name"+string);
+}
+
+@When("I entered Address as {string}")
+public void i_entered_Address_as(String string) {
+	driver.findElement(By.name("customer.address.street")).sendKeys(string);
+    scn.write("entered address"+string);
+}
+
+@When("I entered City as {string}")
+public void i_entered_City_as(String string) {
+	driver.findElement(By.name("customer.address.city")).sendKeys(string);
+    scn.write("entered city "+string);
+}
+
+@When("I entered State as	{string}")
+public void i_entered_State_as(String string) {
+	driver.findElement(By.name("customer.address.state")).sendKeys(string);
+    scn.write("entered state " +string);
+}
+
+@When("I entered Zip Code as {string}")
+public void i_entered_Zip_Code_as(String string) {
+	driver.findElement(By.name("customer.address.zipCode")).sendKeys(string);
+    scn.write("entered zip code"+string);
+}
+
+@When("I entered Phone# as {string}")
+public void i_entered_Phone_as(String string) {
+	driver.findElement(By.name("customer.phoneNumber")).sendKeys(string);
+    scn.write("entered phone" +string);
+}
+
+@When("I entered SSN as {string}")
+public void i_entered_SSN_as(String string) {
+	driver.findElement(By.name("customer.ssn")).sendKeys(string);
+    scn.write("entered ssn " +string);
+}
+
+@When("I entered Username as {string}")
+public void i_entered_Username_as(String string) {
+	driver.findElement(By.name("customer.username")).sendKeys(string);
+    scn.write("entered username" + string);
+}
+
+@When("I entered Password as {string}")
+public void i_entered_Password_as(String string) {
+	driver.findElement(By.name("customer.password")).sendKeys(string);
+    scn.write("entered password " + string);
+}
+
+@When("I entered Confirm as {string}")
+public void i_entered_Confirm_as(String string) {
+	driver.findElement(By.name("repeatedPassword")).sendKeys(string);
+    scn.write("entered confirm password"+ string);
+}
+@When("I click  button {string}")
+public void i_click_button(String string) {
+    driver.findElement(By.xpath("//input[@value='Register']")).click();
+    scn.write("Register button clicked");
+}
+@Then("confirmation msg appeared as {string}")
+public void confirmation_msg_appeared_as(String string) {
+	String actualtext = driver.findElement(By.xpath("//div[@id=\"rightPanel\"]")).getText();
+	scn.write(actualtext);
+	String expectedtext = string;
+	if(actualtext.contains(expectedtext))
+	{
+		scn.write("pass:Your account was created successfully. You are now logged in.");
+	}
+	else
+	{
+		scn.write("fail");
+	}
+    
+}
+
+}
+	
+
+
+	

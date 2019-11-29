@@ -1,6 +1,6 @@
 Feature: Parabank ForgotLoginInfo feature
   I want to test parabank ForgotloginInfo functionality
-  @wip
+  
   Scenario: Validate Login
     Given Browser is  invoked
     

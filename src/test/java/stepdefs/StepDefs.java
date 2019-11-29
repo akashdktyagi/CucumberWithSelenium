@@ -27,7 +27,8 @@ public class StepDefs {
 	//Hooks
 	@Before
 	public void BeforeMethod(Scenario s) {
-		this.scn = s;
+		System.setProperty("webdriver.chrome.driver","E:\\setup java\\chromedriver\\chromedriver.exe");
+		this.scn=s;
 	}
 	
 	@After
@@ -44,6 +45,7 @@ public class StepDefs {
 		i_enter_username_as(u);
 		i_enter_password_as(p);
 		i_click_on_submit_button();
+		
 		
 		
 	}
@@ -84,7 +86,7 @@ public class StepDefs {
 	@When("I click on {string}")
 	public void i_click_on(String arg) {
 
-		driver.findElement(By.linkText(arg)).click();;
+		driver.findElement(By.linkText(arg)).click();
 		scn.write("Clicked on Menu Link: " + arg);
 	}
 
@@ -104,6 +106,13 @@ public class StepDefs {
 	//*********************************************
 	//*******************Transfer Funds************
 	//*********************************************
+	
+	@When("I enter amount as {string} in amount field")
+	public void i_enter_amount_as_in_amount_field(String string) {
+		driver.findElement(By.id("amount")).sendKeys(string);
+		scn.write("Entered amount as :" + string);
+
+	}
 	@When("I select account {string} in from account field")
 	public void i_select_account_in_from_account_field(String arg) {
 
@@ -122,31 +131,82 @@ public class StepDefs {
 
 	}
 
-	@When("I enter amount as {string} in amount field")
-	public void i_enter_amount_as_in_amount_field(String string) {
-		driver.findElement(By.id("amount")).sendKeys(string);;
-		scn.write("Entered amount as :" + string);
-
-	}
-
 	@When("I click on transfer funds button")
 	public void i_click_on_transfer_funds_button() {
 		driver.findElement(By.xpath("//input[@value='Transfer']")).click();
 		scn.write("Tranfer funds button clicked");
 	}
 
-	@Then("Transfer is sucessfull message should come")
-	public void transfer_is_sucessfull_message_should_come() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
+	
+/*@Then("Transfer is sucessfull message should come {string}")
+public void transfer_is_sucessfull_message_should_come(String string) {
+	String expected =string;
+	String actual = driver.findElement(By.xpath("//h1[@class='title']")).getText();
+	Assert.assertEquals(expected, actual);
+	scn.write("Transfer is sucessfull message coming as" + string);
+
+   }*/
+
+	@Then("Verify  Amount {string} is transfered from account {string} to account {string}")
+	public void verify_Amount_is_transfered_from_account_to_account(String string, String string2, String string3) {
+	String expected =string;
+	String actual = driver.findElement(By.xpath("//span[@class='ng-binding']")).getText();
+	Assert.assertEquals(expected, actual);
+	scn.write("Transfer is sucessfull message coming as" + string);
+
+			
+}
+
+//***************************************************************************
+//***********************Apply for loan***************************************
+	//************************************************************************
+	@When("I enter Loan Amount as {string}")
+	public void i_enter_Loan_Amount_as(String string) {
+		driver.findElement(By.id("amount")).sendKeys(string);
+		scn.write("Entered Loan amount as :" + string);
+
+  
 	}
 
-	@Then("verify amount is transfered from account {string} to account {string}")
-	public void verify_amount_is_transfered_from_account_to_account(String string, String string2) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
+	@When("I enter DownPayment Amount as {string}")
+	public void i_enter_DownPayment_Amount_as(String string) {
+		driver.findElement(By.id("downPayment")).sendKeys(string);
+		scn.write("Entered DownPayment amount as :" + string);
+
 	}
 
+	@When("I select Account as {string}")
+	public void i_select_Account_as(String arg) {
+		WebElement element = driver.findElement(By.id("fromAccountId"));
+		Select select  = new Select(element);
+		select.selectByVisibleText(arg);
+		scn.write("I selected account as : " + arg);
 
+	}
+
+@When("I click on Apply Now button")
+public void i_click_on_Apply_Now_button() {
+	driver.findElement(By.xpath("//input[@value='Apply Now']")).click();
+	scn.write(" Apply Now button clicked");
+    }
+
+@Then("Loan status is {string}")
+public void loan_status_is(String arg) {
+	String expected =arg;
+	String actual = driver.findElement(By.xpath("//td[@id='loanStatus']")).getText();
+	Assert.assertEquals(expected, actual);
+	scn.write("Loan status message coming as: " + arg);
+}
+
+@Then("message should come as {string}")
+public void message_should_come_as(String String) {
+	String expected =String;
+	String actual = driver.findElement(By.xpath("//p[@class='error ng-scope']")).getText();
+	Assert.assertEquals(actual, expected);
+	scn.write("And message coming as: " + String); 
+}
+
+ 
 	
 }
+

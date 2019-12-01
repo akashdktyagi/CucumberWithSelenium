@@ -1,4 +1,3 @@
-@wip
 Feature: Open New Account Feature
   I want to open new account
 

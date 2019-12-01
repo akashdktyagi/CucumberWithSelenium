@@ -17,6 +17,7 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+//import org.junit.*;
 import junit.framework.Assert;
 import po.PO_Login;
 import po.PO_TransferFunds;
@@ -41,7 +42,7 @@ public class StepDefs {
 	
 	@After
 	public void AfterMethod(Scenario s) {
-		driver.quit();
+		//driver.quit();
 		scn.write("Driver is closed");
 	}
 	
@@ -90,8 +91,7 @@ public class StepDefs {
 	
 	@When("I click on {string}")
 	public void i_click_on(String arg) {
-		oPO_TransferFunds = PageFactory.initElements(driver, PO_TransferFunds.class);
-	
+		driver.findElement(By.linkText(arg)).click();
 		scn.write("Clicked on Menu Link: " + arg);
 	}
 
@@ -236,22 +236,17 @@ public class StepDefs {
 		scn.write("New Account displays amount as : " + string);
 	}
 
-	@Then("New Account's activity table displayes Funds Transfer Received message")
-	public void new_Account_s_activity_table_displayes_Funds_Transfer_Received_message() {
-		WebElement e = driver.findElement(By.xpath("//table[@id='transactionTable']//a[text()='Funds Transfer Received']"));
-		Assert.assertEquals(true, e.isDisplayed());
-		scn.write("Transaction table displayed with the message");
-	}
 
 	@Then("Original Account ammount should get deducted by {string} from account {string}")
 	public void original_Account_ammount_should_get_deducted_by(String exp_amount, String acc) {
 		WebElement e = driver.findElement(By.xpath("//a[text()='"+acc+"']/parent::td/following-sibling::td[1]"));
 		String deducted_ammount = e.getText().replace("$", "");
 		ORIGINAL_ACC_AMMOUNT = ORIGINAL_ACC_AMMOUNT.replace("$", "");
-		int temp = Integer.parseInt(ORIGINAL_ACC_AMMOUNT);
-		int temp1 = Integer.parseInt(deducted_ammount);
-		int result = temp-temp1;
-		Assert.assertEquals(exp_amount, result);
+		Float temp = Float.parseFloat(ORIGINAL_ACC_AMMOUNT);
+		Float temp1 = Float.parseFloat(deducted_ammount);
+		Float result = temp-temp1;
+		Assert.assertEquals("",Float.parseFloat(exp_amount), result);
+		scn.write("Original balance: " + ORIGINAL_ACC_AMMOUNT + " after transaction amount: " + deducted_ammount + " amount deducted appearing coorectly as: " + exp_amount);
 	
 	}
 

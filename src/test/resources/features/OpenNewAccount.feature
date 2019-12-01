@@ -13,6 +13,5 @@ Feature: Open New Account Feature
     And New Account Number is created
     And New Account is displayed under account Overview table
     And New Account should have ammount as "$100.00"
-    And New Account's activity table displayes Funds Transfer Received message
 		And Original Account ammount should get deducted by "100" from account "13344"
   

@@ -255,13 +255,8 @@ public class StepDefs {
 
 @When("I fill Bill payment form with data as")
 public void i_fill_Bill_payment_form_with_data_as(Map<String,String> data) {
-    // Write code here that turns the phrase above into concrete actions
-    // For automatic transformation, change DataTable to one of
-    // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-    // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-    // Double, Byte, Short, Long, BigInteger or BigDecimal.
-    //
-    // For other transformations you can register a DataTableType.
+
+	driver.findElement(By.name("payee.name")).sendKeys(data.get("name"));
     scn.write("Data sent from Feature file: " + data.toString());
 }
 

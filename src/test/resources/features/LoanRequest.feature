@@ -1,7 +1,7 @@
 
 Feature: Request Loan
 	I want to Request for Loan 
-	@wip
+	
   Scenario: Apply for Loan when DownPayment is less.(Negative Test Case)   
 		Given Login in to Parabank url as "http://parabank.parasoft.com/parabank/index.htm" username as "john" passowrd as "demo"
 		When I click on "Request Loan"

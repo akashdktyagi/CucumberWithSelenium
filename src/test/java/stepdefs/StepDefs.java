@@ -1,5 +1,6 @@
 package stepdefs;
 
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -205,8 +206,44 @@ public void message_should_come_as(String String) {
 	Assert.assertEquals(actual, expected);
 	scn.write("And message coming as: " + String); 
 }
+//*************************************************************************************************
+//******************************************Bill Pay****************************************************
+
+@When("I fill Bill payment form with data as")
+public void i_fill_Bill_payment_form_with_data_as( Map<String,String> data) {
+    
+	driver.findElement(By.name("payee.name")).sendKeys(data.get("name"));
+	driver.findElement(By.name("payee.address.street")).sendKeys(data.get("Address"));
+	driver.findElement(By.name("payee.address.city")).sendKeys(data.get("city"));
+	driver.findElement(By.name("payee.address.state")).sendKeys(data.get("state"));
+	driver.findElement(By.name("payee.address.zipCode")).sendKeys(data.get("zipCode"));
+	driver.findElement(By.name("payee.phoneNumber")).sendKeys(data.get("phone"));
+	driver.findElement(By.name("payee.accountNumber")).sendKeys(data.get("Account"));
+	driver.findElement(By.name("verifyAccount")).sendKeys(data.get("verifyAccount"));
+	driver.findElement(By.name("amount")).sendKeys(data.get("Ammount"));
+	WebElement element = driver.findElement(By.name("fromAccountId"));
+	Select select  = new Select(element);
+	select.selectByVisibleText("12900");
+	scn.write("Data sent from Feature file: " + data.toString());
+}
+
+@When("I click on SEND PAYMENT button")
+public void i_click_on_SEND_PAYMENT_button() {
+	driver.findElement(By.xpath("//input[@value='Send Payment']")).click();
+	scn.write(" Send Payment button clicked");
+    }
+@Then("Message should come as {string}")
+public void message_should_comeas(String arg) {
+	String expected =arg;
+	String actual = driver.findElement(By.xpath("//*[@id='rightPanel']/div/div[2]/p[1]")).getText();
+	Assert.assertEquals(actual, expected);
+	scn.write("And message coming as: " + arg);  
+}
+
+
+
+}
 
  
 	
-}
 

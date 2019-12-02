@@ -3,7 +3,7 @@
 Feature: Transfer Funds
 	I want to transfer funds from one account to other account
 	
-	@tag1
+	
   Scenario: Transfer Funds
 		Given Login in to Parabank url as "http://parabank.parasoft.com/parabank/index.htm" username as "john" passowrd as "demo"
 		When I click on "Transfer Funds"

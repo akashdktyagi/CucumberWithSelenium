@@ -1,6 +1,6 @@
 Feature: Parabank Login feature
   I want to test parabank login functionality
-
+  @tag12
   Scenario: Validate Login
     Given Browser is  invoked
     And navigate to URL "http://parabank.parasoft.com/parabank/index.htm"

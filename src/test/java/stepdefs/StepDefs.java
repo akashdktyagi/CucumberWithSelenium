@@ -1,5 +1,6 @@
 package stepdefs;
 
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -13,16 +14,20 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import org.junit.Assert;
+import junit.framework.Assert;
+import junit.framework.*;
 
 public class StepDefs {
 	
 	WebDriver driver;
 	Scenario scn;
-
+	//Open New Account Number variable
+		String NEW_ACCOUNT_NUMBER;
+		String ORIGINAL_ACC_AMMOUNT;
 
 	//Hooks
 	@Before
@@ -36,6 +41,7 @@ public class StepDefs {
 		scn.write("Driver is closed");
 
 	}
+	//*******Feature: Parabank Login feature********//
 	
 	@Given("Login in to Parabank url as {string} username as {string} passowrd as {string}")
 	public void login_in_to_parabank(String url, String u, String p) {
@@ -147,8 +153,11 @@ public class StepDefs {
 	    throw new cucumber.api.PendingException();
 	}
 
-	@Then("I click on {string} Button")
-	public void i_click_on_Button(String string) {
+	    //*********************************************
+		//*******************Feature: Applying for loan************
+		//*********************************************
+	@Then("I click on {string} button")
+	public void i_click_on_button(String string) {
 		driver.findElement(By.xpath("//*[@id=\"leftPanel\"]/ul/li[7]/a")).click();
 		scn.write("Request for Loan");
 	    
@@ -176,10 +185,10 @@ public class StepDefs {
 	    
 	}
 
-	@Then("I click on Appply Now Button")
-	public void i_click_on_Appply_Now_Button() {
+	@Then("I click on Apply Now Button")
+	public void i_click_on_Apply_Now_Button() {
 		driver.findElement(By.xpath("//*[@id=\"leftPanel\"]/ul/li[7]/a")).click();
-		scn.write("I click on Appply Now Button");
+		scn.write("I click on Apply Now Button");
 	    
 	    
 	}
@@ -189,19 +198,204 @@ public class StepDefs {
 		driver.findElement(By.name("Loan Request Processed"));
 		scn.write("Loan Request Processed page should Display");
 	    
-	    
 	}
 
 	@Then("Loan Status is denied {string}")
 	public void loan_Status_is_denied(String string) {
 		driver.findElement(By.id("loanStatus")).sendKeys(string);
 		scn.write("Loan Status is denied {string}");
-	    
-	   
+	}
+	
+///*****checking useranme credintials*******//
+	
+//**************OPENNEWACCOUNTFEATURE*******************//
+
+	@Given("Fetch Balance of Account {string}")
+	public void fetch_balance_of_account(String acc_number) {
+		
+		WebElement e = driver.findElement(By.xpath("//a[text()='"+acc_number+"']/parent::td/following-sibling::td[1]"));
+		ORIGINAL_ACC_AMMOUNT= e.getText();
+		scn.write("Original Account number is : " + acc_number + " and ammount before transaction is : " + ORIGINAL_ACC_AMMOUNT );
+	}
+	
+	@When("I select account type as {string}")
+	public void i_select_account_type_as(String string) {
+		WebElement e = driver.findElement(By.id("type"));
+		Select list = new Select(e);
+		list.selectByVisibleText(string);
+		scn.write("Type selected as : " + string);
 	}
 
+	@When("I select the account number as {string}")
+	public void i_select_the_account_number_as(String string) {
+		WebElement e = driver.findElement(By.id("fromAccountId"));
+		Select list = new Select(e);
+		list.selectByVisibleText(string);
+		scn.write("Account Number selected as : " + string);
+	}
 
+	@When("I click on Open New Account Button")
+	public void i_click_on_Open_New_Account_Button() {
+		driver.findElement(By.xpath("//input[@value='Open New Account']")).click();
+		scn.write("Open New Account Button is Clicked");
+	}
+	
+	@Then("Account Opened  message should come")
+	public void account_Opened_message_should_come() {
+
+		WebElement e = driver.findElement(By.xpath("//div[@ng-if='showResult' and @class='ng-scope']"));
+		String actual_text = e.getText();
+		if (actual_text.contains("Account Opened!")) {
+			scn.write("AccountOpened Message is coming");
+			Assert.assertTrue(true);
+		}else {
+			scn.write("AccountOpened Message is not coming");
+			Assert.assertTrue(false);
+		}
+		
+		if (actual_text.contains("Congratulations, your account is now open.")) {
+			scn.write("Congratulations, your account is now open. Message is coming");
+			Assert.assertTrue(true);
+		}else {
+			scn.write("Congratulations, your account is now open. Message is not coming");
+			Assert.assertTrue(false);
+		}
+		
+	}
+
+	@Then("New Account Number is created")
+	public void new_Account_Number_is_created() {
+		WebElement e = driver.findElement(By.id("newAccountId"));
+		NEW_ACCOUNT_NUMBER = e.getText();
+		scn.write("New Account number created. Account no.: " + NEW_ACCOUNT_NUMBER);
+	}
+
+	@Then("New Account is displayed under account Overview table")
+	public void new_Account_is_displayed_under_account_Overview_table() {
+		//Click on Account Overview Link
+		i_click_on("Accounts Overview");
+		WebElement e = driver.findElement(By.xpath("//table[@id='accountTable']//a[text()='"+NEW_ACCOUNT_NUMBER+"']"));
+		Assert.assertEquals(true, e.isDisplayed());
+		scn.write("New Account Number link is displayed");
+
+	}
+
+	@Then("New Account should have ammount as {string}")
+	public void new_Account_should_have_ammount_as(String string) {
+		String xpath = "//table[@id='accountTable']//a[text()='"+NEW_ACCOUNT_NUMBER+"']/parent::td/following-sibling::td[1]";
+		WebElement e = driver.findElement(By.xpath(xpath));
+		String actual = e.getText();
+		String expected = string;
+		Assert.assertEquals(expected, actual);
+		scn.write("New Account displays amount as : " + string);
+	}
+
+	
+
+	@Then("Original Account ammount should get deducted by {string} from account {string}")
+	public void original_Account_ammount_should_get_deducted_by(String exp_amount, String acc) {
+		WebElement e = driver.findElement(By.xpath("//a[text()='"+acc+"']/parent::td/following-sibling::td[1]"));
+		String deducted_ammount = e.getText().replace("$", "");
+		ORIGINAL_ACC_AMMOUNT = ORIGINAL_ACC_AMMOUNT.replace("$", "");
+		Float temp = Float.parseFloat(ORIGINAL_ACC_AMMOUNT);
+		Float temp1 = Float.parseFloat(deducted_ammount);
+		Float result = temp-temp1;
+		Assert.assertEquals("",Float.parseFloat(exp_amount), result);
+		scn.write("Original balance: " + ORIGINAL_ACC_AMMOUNT + " after transaction amount: " + deducted_ammount + " amount deducted appearing coorectly as: " + exp_amount);
+	
+	}
+	
+	//**********************************Bill Payment***************************************************//
+	
+	@Given("I click on Bill Pay")
+	public void i_click_on_Bill_Pay() {
+	driver.findElement(By.xpath("//a[@href='/parabank/billpay.htm']")).click();
+	scn.write("I click on Bill Pay");
+	}
+
+	@Given("I Fill Payee Name as {string}")
+	public void i_Fill_Payee_Name_as(String string) {
+		driver.findElement(By.xpath("//input[@name='payee.name']")).sendKeys(string);
+		scn.write("I Fill Payee Name");
+	}
+
+	@Given("I fill Address as {string}")
+	public void i_fill_Address_as(String string) {
+		driver.findElement(By.xpath("//input[@name='payee.address.street']")).sendKeys(string);
+		scn.write("I fill Address as");
+	}
+
+	@Given("I fill City as {string}")
+	public void i_fill_City_as(String string) {
+		driver.findElement(By.xpath("//input[@name='payee.address.city']")).sendKeys(string);
+		scn.write("I fill City as");
+	}
+
+	@Given("I fill State as {string}")
+	public void i_fill_State_as(String string) {
+		driver.findElement(By.xpath("//input[@name='payee.address.state']")).sendKeys(string);
+		scn.write("I fill State as");
+	}
+
+	@Given("I fill Zip Code as {string}")
+	public void i_fill_Zip_Code_as(String string) {
+		driver.findElement(By.xpath("//input[@name='payee.address.zipCode']")).sendKeys(string);
+		scn.write("I fill Zip Code as");
+	}
+
+	@Given("I fill Phone as {string}")
+	public void i_fill_Phone_as(String string) {
+		driver.findElement(By.xpath("//input[@name='payee.phoneNumber']")).sendKeys(string);
+		scn.write("I fill Phone as");
+	}
+
+	@When("I fill Account as {string}")
+	public void i_fill_Account_as(String string) {
+		driver.findElement(By.xpath("//input[@name='payee.accountNumber']")).sendKeys(string);
+		scn.write("I fill Account as");
+	}
+
+	@When("I fill Verify Account as {string}")
+	public void i_fill_Verify_Account_as(String string) {
+		driver.findElement(By.xpath("//input[@name='verifyAccount']")).sendKeys(string); 
+		scn.write("I fill Verify Account as");
+	}
+
+	@When("I fill Amount as {string}")
+	public void i_fill_Amount_as(String string) {
+		driver.findElement(By.xpath("//input[@name='amount']")).sendKeys(string);
+	}
+
+	@When("I fill From account as {string}")
+	public void i_fill_From_account_as(String string) {
+		driver.findElement(By.xpath("//select[@name='fromAccountId']")).sendKeys(string);
+		scn.write("I fill From account as ");
+	}
+
+	@When("I click On Send Payment button")
+	public void i_click_On_Send_Payment_button() {
+	   driver.findElement(By.xpath("//input[@value='Send Payment']")).click();
+	   scn.write("I click On Send Payment button");
+	}
+
+	@Then("successful bill payment message should come")
+	public void successful_bill_payment_message_should_come() {
+	 WebElement e = driver.findElement(By.xpath("//h1[@class='title']"));
+	 String expected ="Bill Payment Complete";  
+	 String actual= e.getText();
+	 if(actual.equals(expected))
+	 {
+		 scn.write("successful bill payment message should come");
+	 }
+	 else
+	 {
+		 scn.write("successful bill payment message should come");
+	 }
+		
+		
+	}
+
+}
 
 
 	
-}

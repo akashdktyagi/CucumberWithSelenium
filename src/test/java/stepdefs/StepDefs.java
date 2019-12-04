@@ -394,6 +394,110 @@ public class StepDefs {
 		
 		
 	}
+	
+	//**********************************BILL PAYMENT NEGATIVE TEST CASE******************************************************//
+
+@When("I click on Send Payment button with out filling any fields")
+public void i_click_on_Send_Payment_button_with_out_filling_any_fields() {
+	driver.findElement(By.xpath("//input[@value='Send Payment']")).click();
+    scn.write("I click on Send Payment button with out filling any fields");
+}
+
+@Then("below types of errors will be displayed for each field")
+public void below_types_of_errors_will_be_displayed_for_each_field( Map<String,String> DataTable) {
+	driver.findElement(By.name("payee.name")).sendKeys(DataTable.get("name"));
+	driver.findElement(By.name("payee.address.street")).sendKeys(DataTable.get("Address"));
+	driver.findElement(By.name("payee.address.city")).sendKeys(DataTable.get("city"));
+	driver.findElement(By.name("payee.address.state")).sendKeys(DataTable.get("state"));
+	driver.findElement(By.name("payee.address.zipCode")).sendKeys(DataTable.get("zipCode"));
+	driver.findElement(By.name("payee.phoneNumber")).sendKeys(DataTable.get("phone"));
+	driver.findElement(By.name("payee.accountNumber")).sendKeys(DataTable.get("Account"));
+	driver.findElement(By.name("verifyAccount")).sendKeys(DataTable.get("verifyAccount"));
+	driver.findElement(By.name("amount")).sendKeys(DataTable.get("Ammount"));
+	scn.write("below types of errors will be displayed for each field");
+}
+
+
+//********************************AccountOverview****************************************************//
+
+@When("I click on Account Overview")
+public void i_click_on_Account_Overview() {
+    driver.findElement(By.xpath("//a[@href='/parabank/overview.htm']")).click();
+    scn.write("I click on Account Overview");
+}
+
+
+@Then("Account Overview page is displayed")
+public void account_Overview_page_is_displayed() {
+  WebElement  e = driver.findElement(By.xpath("//h1[@class='title']"));
+  e.getText();
+  scn.write("Account Overview page is displayed");
+}
+
+@Then("Account Overview Table is displayed")
+public void account_Overview_Table_is_displayed() {
+   WebElement e1= driver.findElement(By.id("accountTable"));
+    e1.getText();
+    scn.write("Account Overview Table is displayed");
+}
+
+@Then("Sum of all the accounts is equal to total amount displayed at the bottom of the table")
+public void sum_of_all_the_accounts_is_equal_to_total_amount_displayed_at_the_bottom_of_the_table() {
+  WebElement e3= driver.findElement(By.xpath("//b[@class='ng-binding']"));
+  e3.getText();
+  scn.write("Sum of all the accounts is equal to total amount displayed at the bottom of the table");
+}
+
+///************************RegisterNewUser*******************************/
+@Given("Navigate to Parabank with url as {string}")
+public void navigate_to_Parabank_with_url_as(String string) {
+	driver.get(string);
+    scn.write("Navigate to Parabank with url");
+}
+
+@When("I click on Register")
+public void i_click_on_Register() {
+	driver.findElement(By.xpath("//a[@href='register.htm']")).click();
+	scn.write("I click on Register");
+    
+}
+
+@When("fills the form with data as below")
+public void fills_the_form_with_data_as_below(Map<String,String> data) {
+	driver.findElement(By.id("customer.firstName")).sendKeys(data.get("FirstName"));
+	driver.findElement(By.id("customer.lastName")).sendKeys(data.get("LastName"));
+	driver.findElement(By.id("customer.address.street")).sendKeys(data.get("Address"));
+	driver.findElement(By.id("customer.address.city")).sendKeys(data.get("City"));
+	driver.findElement(By.id("customer.address.state")).sendKeys(data.get("State"));
+	driver.findElement(By.id("customer.address.zipCode")).sendKeys(data.get("Zip Code"));
+	driver.findElement(By.id("customer.phoneNumber")).sendKeys(data.get("Phone"));
+	driver.findElement(By.id("customer.ssn")).sendKeys(data.get("SSN"));
+	driver.findElement(By.id("customer.username")).sendKeys(data.get("Username"));
+	driver.findElement(By.id("customer.password")).sendKeys(data.get("Password"));
+	driver.findElement(By.id("repeatedPassword")).sendKeys(data.get("Confirm"));
+	scn.write("fills the form with data as below");
+    
+}
+
+@Then("New User is created and User is immediatly logged in")
+public void new_User_is_created_and_User_is_immediatly_logged_in() {
+	WebElement e5 = driver.findElement(By.xpath("//input[@name='username']"));
+	e5.sendKeys("Aakash");
+	
+	WebElement e6 = driver.findElement(By.xpath("//input[@name='password']"));
+	e6.sendKeys("1234");
+	
+	driver.findElement(By.xpath("//input[@value='Log In']")).click();
+	
+	scn.write("New User is created and User is immediatly logged in");
+   }
+
+@Then("New user is able to login successfully again after logout")
+public void new_user_is_able_to_login_successfully_again_after_logout() {
+	driver.findElement(By.xpath("//a[@href='/parabank/logout.htm']")).click();
+	
+    }
+
 
 }
 

@@ -14,7 +14,7 @@ import cucumber.api.junit.Cucumber;
 				"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
 		tags = "@wip",
 		monochrome = true,
-		dryRun =false
+		dryRun = false
 		)
 public class RunTest {
 

@@ -2,7 +2,7 @@
 Feature: Bill Payment Feature
   I want to perform Bill Payment 
 
-  @wip
+
   Scenario: Bill Payment
     Given Login in to Parabank url as "http://parabank.parasoft.com/parabank/index.htm" username as "john" passowrd as "demo"
 		And I click on Bill Pay 
@@ -18,5 +18,5 @@ Feature: Bill Payment Feature
     And I fill From account as "18894"
     And I click On Send Payment button
     Then successful bill payment message should come 
-
- 
+   
+   

@@ -240,9 +240,110 @@ public void message_should_comeas(String arg) {
 	scn.write("And message coming as: " + arg);  
 }
 
+//************************************************************************************
+//***************************Bill Pay Negative test case****************************
+//****************************************************************************************
+@When("I click on Send Payment button with out filling any fields")
+public void i_click_on_Send_Payment_button_with_out_filling_any_fields() {
+	driver.findElement(By.xpath("//input[@value='Send Payment']")).click();
+	scn.write(" Send Payment button clicked");
+    } 
+
+
+@Then("below types of errors will be displayed for each field")
+public void below_types_of_errors_will_be_displayed_for_each_field(Map<String,String> data) {
+	driver.findElement(By.xpath("//span[@class='error']")).click();
+	scn.write("Respective errors are: " + data.toString());
+	
+  
+}
+//**********************************************************************************
+//***************************Register New USer****************************************
+//*****************************************************************************8888
+@Given("Browser is invoked")
+public void browser_isinvoked() {
+	driver = new ChromeDriver();
+	driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+	driver.manage().window().maximize();
+	
+	scn.write("Browser Invoked and maximized");
+
+}
+
+@Given("Navigate to Parabank with url as {string}")
+public void navigate_to_Parabank_with_url_as(String arg) {
+	driver.get(arg);
+	scn.write("Browser navigated to url: " + arg);
+}
+
+@When("fills the form with data as below")
+public void fills_the_form_with_data_as_below(Map<String,String> data) {
+	driver.findElement(By.name("customer.firstName")).sendKeys(data.get("FirstName"));
+	driver.findElement(By.name("customer.lastName")).sendKeys(data.get("LastName"));
+	driver.findElement(By.name("customer.address.street")).sendKeys(data.get("Address"));
+	driver.findElement(By.name("customer.address.city")).sendKeys(data.get("City"));
+	driver.findElement(By.name("customer.address.state")).sendKeys(data.get("State"));
+	driver.findElement(By.name("customer.address.zipCode")).sendKeys(data.get("ZipCode"));
+	driver.findElement(By.name("customer.phoneNumber")).sendKeys(data.get("Phone"));
+	driver.findElement(By.name("customer.ssn")).sendKeys(data.get("SSN"));
+	driver.findElement(By.name("customer.username")).sendKeys(data.get("Username"));
+	driver.findElement(By.name("customer.password")).sendKeys(data.get("Password"));
+	driver.findElement(By.name("repeatedPassword")).sendKeys(data.get("ConfirmPassword"));
+	scn.write("Data sent from Feature file: " + data.toString());
+}
+
+@When("I click on Register Button")
+public void i_click_on_Register_Button() {
+	driver.findElement(By.xpath("//input[@value='Register']")).click();
+	scn.write(" Register button clicked");
+  
+}
+
+@Then("New User is created and User is immediatly logged in username as {string} and password as {string}")
+public void new_User_is_created_and_User_is_immediatly_logged_in_username_as_and_password_as(String arg1, String arg2) {
+	i_enter_username_as(arg1);
+	i_enter_password_as(arg2);
+	i_click_on_submit_button();
+	scn.write(" New User is created and immediatly logged in"); 
+	scn.write("And Username entered as:"+arg1);
+	scn.write("And Password entered as:"+arg2);
+
+}
+
+@Then("New user is able to login successfully again after logout")
+public void new_user_is_able_to_login_successfully_again_after_logout() {
+	driver.findElement(By.xpath("//a[@href='/parabank/logout.htm']")).click();
+	scn.write("New user is able to login successfully and logout");
+	
+}
+
+//*******************************************************************************************
+//*************************************Account Overview*************************************
+//********************************************************************************************
+
+@Then("Account Overview page is displayed")
+public void account_Overview_page_is_displayed() {
+	  WebElement  element = driver.findElement(By.xpath("//h1[@class='title']"));
+	  element.getText();
+	  scn.write("Account Overview page is displayed");
+
+}
+
+@Then("Account Overview Table is displayed")
+public void account_Overview_Table_is_displayed() {
+		}
+
+@Then("Sum of all the accounts is equal to total amount displayed at the bottom of the table")
+public void sum_of_all_the_accounts_is_equal_to_total_amount_displayed_at_the_bottom_of_the_table() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new cucumber.api.PendingException();
+}
 
 
 }
+
+
+
 
  
 	

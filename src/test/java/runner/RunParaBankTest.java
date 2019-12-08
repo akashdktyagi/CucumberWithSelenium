@@ -7,15 +7,15 @@ import cucumber.api.junit.Cucumber;
 @RunWith(Cucumber.class)
 @CucumberOptions(
 		
-		features="classpath:features",
-		glue="stepdefs",
+		features="classpath:features/parabank",
+		glue="parabank.stepdefs",
 		plugin = {"pretty",
 				"html:target/CucumberReport",
 				"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
-		tags = "@wip",
+		tags = "",
 		dryRun = false
 		
 		)
-public class RunTest {
+public class RunParaBankTest {
 
 }

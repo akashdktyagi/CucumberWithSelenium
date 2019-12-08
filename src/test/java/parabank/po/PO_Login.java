@@ -1,4 +1,4 @@
-package po;
+package parabank.po;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;

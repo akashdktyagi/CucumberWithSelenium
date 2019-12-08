@@ -1,4 +1,4 @@
-package stepdefs;
+package parabank.stepdefs;
 
 import java.util.List;
 import java.util.Map;
@@ -21,8 +21,8 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 //import org.junit.*;
 import junit.framework.Assert;
-import po.PO_Login;
-import po.PO_TransferFunds;
+import parabank.po.PO_Login;
+import parabank.po.PO_TransferFunds;
 
 public class StepDefs {
 	
@@ -44,7 +44,7 @@ public class StepDefs {
 	
 	@After
 	public void AfterMethod(Scenario s) {
-		//driver.quit();
+		driver.quit();
 		scn.write("Driver is closed");
 	}
 	

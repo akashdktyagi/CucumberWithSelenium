@@ -19,7 +19,8 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import junit.framework.Assert;
-import junit.framework.*;
+
+
 
 public class StepDefs {
 	
@@ -449,18 +450,21 @@ public void sum_of_all_the_accounts_is_equal_to_total_amount_displayed_at_the_bo
 }
 
 ///************************RegisterNewUser*******************************/
-@Given("Navigate to Parabank with url as {string}")
-public void navigate_to_Parabank_with_url_as(String string) {
+
+
+
+@Given("navigate to url as {string}")
+public void navigate_to_url_as(String string) {
 	driver.get(string);
-    scn.write("Navigate to Parabank with url");
 }
+
 
 @When("I click on Register")
 public void i_click_on_Register() {
-	driver.findElement(By.xpath("//a[@href='register.htm']")).click();
+	driver.findElement(By.partialLinkText("register")).click();
 	scn.write("I click on Register");
-    
 }
+
 
 @When("fills the form with data as below")
 public void fills_the_form_with_data_as_below(Map<String,String> data) {
@@ -479,27 +483,33 @@ public void fills_the_form_with_data_as_below(Map<String,String> data) {
     
 }
 
-@Then("New User is created and User is immediatly logged in")
-public void new_User_is_created_and_User_is_immediatly_logged_in() {
-	WebElement e5 = driver.findElement(By.xpath("//input[@name='username']"));
-	e5.sendKeys("Aakash");
-	
-	WebElement e6 = driver.findElement(By.xpath("//input[@name='password']"));
-	e6.sendKeys("1234");
-	
-	driver.findElement(By.xpath("//input[@value='Log In']")).click();
-	
-	scn.write("New User is created and User is immediatly logged in");
-   }
+
+
+@When("I click on Register Button")
+public void i_click_on_Register_Button() {
+	driver.findElement(By.xpath("//input[@value='Register']")).click();
+	scn.write("I click on Register Button");
+}
+
+
+
+@Then("New User is created and User is immediatly logged in username as {string} and password as {string}")
+public void new_User_is_created_and_User_is_immediatly_logged_in_username_as_and_password_as(String string, String string2) {
+   driver.findElement(By.name("username")).sendKeys(string);
+   driver.findElement(By.name("password")).sendKeys(string2);
+   driver.findElement(By.xpath("//input[@value='Log In']")).click();
+   scn.write("New User is created and User is immediatly logged in username as {string} and password as {string}");
+}
 
 @Then("New user is able to login successfully again after logout")
 public void new_user_is_able_to_login_successfully_again_after_logout() {
-	driver.findElement(By.xpath("//a[@href='/parabank/logout.htm']")).click();
-	
-    }
+  driver.findElement(By.xpath("//a[@href='/parabank/logout.htm']")).click();
+  scn.write("New user is able to login successfully again after logout");
+}
 
 
 }
+
 
 
 	

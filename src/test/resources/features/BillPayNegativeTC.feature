@@ -1,7 +1,7 @@
 Feature: Bill Payment Feature
   I want to perform Bill Payment 
 
- @wip
+ 
     Scenario: Negative Check if any filed is left blank, Web Site throws relevant error
 		Given Login in to Parabank url as "http://parabank.parasoft.com/parabank/index.htm" username as "john" passowrd as "demo"
 		When I click on "Bill Pay"

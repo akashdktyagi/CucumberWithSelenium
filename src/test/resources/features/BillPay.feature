@@ -1,7 +1,7 @@
 Feature: Bill Payment Feature
   I want to perform Bill Payment 
 
-  @wip
+  
   Scenario: Bill Payment
     Given Login in to Parabank url as "http://parabank.parasoft.com/parabank/index.htm" username as "john" passowrd as "demo"
 		And I click on Bill Pay 

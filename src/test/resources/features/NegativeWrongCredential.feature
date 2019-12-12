@@ -1,6 +1,6 @@
 Feature: Negative Test case
 
-@wip
+
 Scenario: Negative Test: Enter In-correct email in the User name Box and check error message
     Given I open "chrome" browser
     And I navigate to url as "http://demo.cs-cart.com/"

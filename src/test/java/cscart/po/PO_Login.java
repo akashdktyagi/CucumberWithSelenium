@@ -30,7 +30,7 @@ public class PO_Login
 	@FindBy(how=How.XPATH,using= "//button[@class='ty-btn__login ty-btn__secondary ty-btn']")
 	private WebElement Txt_Login_btn;
 	
-	@FindBy(how=How.LINK_TEXT, using ="Sign out")
+	@FindBy(how=How.XPATH, using = "//div[@class='ty-dropdown-box__title cm-combination logged']")
 	private WebElement Txt_Sign_out_btn;
 	
 	@FindBy(how=How.XPATH,using= "//input[@value='customer@example.com']") 

@@ -17,7 +17,6 @@ import cucumber.api.junit.Cucumber;
 			tags =  "@wip",
 			monochrome = true,
 			dryRun = false
-			
 			)
 	
 	public class RunCSCartTest {

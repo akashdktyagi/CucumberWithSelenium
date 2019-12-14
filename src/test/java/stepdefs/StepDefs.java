@@ -288,6 +288,7 @@ public class StepDefs {
 		String actual = e.getText();
 		String expected = string;
 		Assert.assertEquals(expected, actual);
+		
 		scn.write("New Account displays amount as : " + string);
 	}
 

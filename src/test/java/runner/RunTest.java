@@ -12,7 +12,7 @@ import cucumber.api.junit.Cucumber;
 		plugin = {"pretty",
 				"html:target/CucumberReport",
 				"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
-		tags = "@wip",
+		tags = "@trial",
 		monochrome = true,
 		dryRun = false
 		)

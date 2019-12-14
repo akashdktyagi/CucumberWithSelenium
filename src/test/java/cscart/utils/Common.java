@@ -14,7 +14,8 @@ public class Common {
 		return driver;
 	}
 	
-public static void NavigateToUrl(WebDriver driver,String url) {
+public static void NavigateToUrl(WebDriver driver,String url)
+	{
 		driver.get(url);
 	}
 

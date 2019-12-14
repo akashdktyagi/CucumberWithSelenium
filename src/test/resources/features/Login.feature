@@ -1,6 +1,6 @@
 Feature: Parabank Login feature
   I want to test parabank login functionality
-
+@trial
   Scenario: Validate Login
     Given Browser is  invoked
     And navigate to URL "http://parabank.parasoft.com/parabank/index.htm"
@@ -9,7 +9,7 @@ Feature: Parabank Login feature
     And I click on submit button
     Then Page title should come "ParaBank | Accounts Overview"
    
-  @trial 
+   
 	Scenario: Validate Create New Account
 		Given Browser is  invoked
 		And navigate to URL "http://parabank.parasoft.com/parabank/index.htm"

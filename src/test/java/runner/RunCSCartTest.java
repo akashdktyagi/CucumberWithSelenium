@@ -13,8 +13,8 @@ import cucumber.api.junit.Cucumber;
 		plugin = {"pretty",
 				"html:target/CucumberReport",
 				"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
-		tags = "@wip",
-		dryRun = false
+		tags = "@add_to_cart",
+		dryRun = true
 		
 		)
 public class RunCSCartTest {

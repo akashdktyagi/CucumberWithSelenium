@@ -12,44 +12,54 @@ import cucumber.api.java.en.When;
 import utils.Cmn;
 
 public class CsCartStepDefs {
-	WebDriver driver;
-	PO_Search PO_Search;
-	Scenario scn;
+
+	TestContextCsCart cntxt;
+	
+	public CsCartStepDefs(TestContextCsCart cntxt) {
+		this.cntxt = cntxt;
+	}
 	
 	@Before
 	public void BeforeMethod(Scenario scn) {
-		this.scn = scn;
+		cntxt.scn = scn;
 	}
+	
+	@Given("I open {string} Browser and browser is navigated to {string}")
+	public void i_open_Browser_and_browser_is_navigated_to(String browser, String url) {
+		i_open_browser(browser);
+		i_navigate_to_url_as(url);
+	}
+	
 	
 	@Given("I open {string} browser")
 	public void i_open_browser(String browser) {
-		driver = Cmn.InvokeBrowser(browser);
-		scn.write("Browser Invoked");
+		cntxt.driver = Cmn.InvokeBrowser(browser);
+		cntxt.scn.write("Browser Invoked");
 	}
 
 	@Given("I navigate to url as {string}")
 	public void i_navigate_to_url_as(String url) {
-		Cmn.NavigateToUrl(driver, url);
-		scn.write("URL Navigated to : " + url);
+		Cmn.NavigateToUrl(cntxt.driver, url);
+		cntxt.scn.write("URL Navigated to : " + url);
 	}
 
 	@When("I enter text in search text box as {string}")
 	public void i_enter_text_in_search_text_box_as(String text) {
-		PO_Search = PageFactory.initElements(driver, PO_Search.class);
-		PO_Search.EnterTextInSearchBox(text);
-		scn.write("Search box text entered as :" + text);
+		cntxt.PO_Search = PageFactory.initElements(cntxt.driver, PO_Search.class);
+		cntxt.PO_Search.EnterTextInSearchBox(text);
+		cntxt.scn.write("Search box text entered as :" + text);
 	}
 
 	@When("I click on Search button")
 	public void i_click_on_Search_button() {
-		PO_Search.ClickonSearchButton();
-		scn.write("Clicked on Search Button");
+		cntxt.PO_Search.ClickonSearchButton();
+		cntxt.scn.write("Clicked on Search Button");
 	}
 
 	@Then("Search results are displayed")
 	public void search_results_are_displayed() {
-		PO_Search.ValidateSearchResultIsDisplayed();
-		scn.write("Search Results are displayed successfully");
+		cntxt.PO_Search.ValidateSearchResultIsDisplayed();
+		cntxt.scn.write("Search Results are displayed successfully");
 	}
 
 

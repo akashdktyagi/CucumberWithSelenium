@@ -9,13 +9,17 @@ import cucumber.api.junit.Cucumber;
 		
 		features="classpath:features",
 		glue="stepdefs",
-		plugin = {"pretty",
+		plugin = {
+				"pretty",
 				"html:target/CucumberReport",
 				"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
 		tags = "@wip",
+		monochrome =true,
+		strict=true,
 		dryRun = false
 		
 		)
-public class RunTest {
+public class RunTest
+{
 
 }

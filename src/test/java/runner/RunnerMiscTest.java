@@ -11,13 +11,13 @@ import cucumber.api.junit.Cucumber;
 		features="classpath:features/Misc",
 		glue="misc",
 		plugin = {"pretty",
-				"html:target/cucumber",
-				"json:target/cucumber.json",
+				"html:target/cucumber2",
+				"json:target/cucumber2.json",
 				"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
 		tags = "",
 		dryRun = false
 		
 		)
-public class RunnerMisc {
+public class RunnerMiscTest {
 
 }

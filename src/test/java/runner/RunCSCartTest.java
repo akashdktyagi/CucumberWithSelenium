@@ -11,8 +11,8 @@ import cucumber.api.junit.Cucumber;
 		features="classpath:features/cscart",
 		glue="cscart.stepdefs",
 		plugin = {"pretty",
-				"html:target/cucumber",
-				"json:target/cucumber.json",
+				"html:target/cucumber1",
+				"json:target/cucumber1.json",
 				"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
 		tags = "",
 		dryRun = false

@@ -11,10 +11,11 @@ import cucumber.api.junit.Cucumber;
 		features="classpath:features/cscart",
 		glue="cscart.stepdefs",
 		plugin = {"pretty",
-				"html:target/CucumberReport",
+				"html:target/cucumber",
+				"json:target/cucumber.json",
 				"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
-		tags = "@add_to_cart",
-		dryRun = true
+		tags = "",
+		dryRun = false
 		
 		)
 public class RunCSCartTest {

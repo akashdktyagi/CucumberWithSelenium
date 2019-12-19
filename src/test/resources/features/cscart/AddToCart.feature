@@ -5,12 +5,12 @@ Feature: To check Add to cart feature
     Given I open "Chrome" Browser and browser is navigated to "http://demo.cs-cart.com/"
 		And I enter text in search text box as "laptop"
 		When I click on Add to Cart for "<ProductSeq>" product
-		Then Product should get added in the my cart section
+		Then Product should get added in the my cart section with default quantity as 1
 		Examples:
 		|ProductSeq|
-		|1|
-		|2|
-		|3|
+		|1         |
+		|2         |
+		|3         |
 		
 	Scenario Outline: Check Add to cart is working for Single Product
     Given I open "Chrome" Browser and browser is navigated to "http://demo.cs-cart.com/"

@@ -10,9 +10,10 @@ import cucumber.api.junit.Cucumber;
 		features="classpath:features/parabank",
 		glue="parabank.stepdefs",
 		plugin = {"pretty",
-				"html:target/CucumberReport",
+				"html:target/cucumber",
+				"json:target/cucumber.json",
 				"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
-		tags = "@trial ",
+		tags = "",
 		dryRun = false
 		
 		)

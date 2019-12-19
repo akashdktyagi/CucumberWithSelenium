@@ -11,9 +11,10 @@ import cucumber.api.junit.Cucumber;
 		features="classpath:features/Misc",
 		glue="misc",
 		plugin = {"pretty",
-				"html:target/CucumberReport",
+				"html:target/cucumber",
+				"json:target/cucumber.json",
 				"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
-		tags = "@wip",
+		tags = "",
 		dryRun = false
 		
 		)

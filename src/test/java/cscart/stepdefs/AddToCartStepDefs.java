@@ -32,5 +32,13 @@ public class AddToCartStepDefs {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new cucumber.api.PendingException();
 	}
+	
+	@Then("Product should get added in the my cart section with default quantity as 1")
+	public void product_should_get_added_in_the_my_cart_section_with_default_quantity_as_1() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+	
+	
 
 }

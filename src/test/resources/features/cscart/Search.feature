@@ -1,6 +1,5 @@
 Feature: Search Feature
 
-	@wip
   Scenario: User wants to search for product using search text box
     Given I open "chrome" browser
     And I navigate to url as "http://demo.cs-cart.com/"

@@ -14,7 +14,7 @@ import cucumber.api.junit.Cucumber;
 				"html:target/cucumber1",
 				"json:target/cucumber1.json",
 				"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
-		tags = "",
+		tags = "@wip",
 		dryRun = false
 		
 		)

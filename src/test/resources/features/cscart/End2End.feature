@@ -12,9 +12,7 @@ Feature: End 2 end flow of e commerce web site
     And I click on Place Order
     Then Order has been received page is displayed
     And Order details are correctly displayed
-    
-
-    
+       
 #        |mobile|M0073Q30SG|
 #    |laptop|V0229W5J8F|
 
